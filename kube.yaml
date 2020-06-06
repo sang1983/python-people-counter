@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: people-counter
+  name: people-counter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: people-counter
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: people-counter
+    spec:
+      containers:
+      - image: sangeetha1511/hackathon2020:v2
+        name: people-counter
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: people-counter-service
+  name: people-counter-service
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: people-counter
+  type: ClusterIP
+status:
+  loadBalancer: {}
